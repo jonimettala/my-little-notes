@@ -30,19 +30,20 @@ app.get('/api/notes/:id', (request, response, next) => {
 app.post('/api/notes', (request, response) => {
   const body = request.body
 
-  if (body.content === undefined) {
+  if (body.title === undefined || body.title === '') {
     return response.status(400).json({ error: 'content missing' })
   }
 
   const note = new Note({
     title: body.title,
-    content: body.content,
+    content: body.content || '',
     important: body.important || false,
     added: new Date(),
     updated: null,
   })
 
   note.save().then(savedNote => {
+    response.status(201)
     response.json(savedNote)
   })
 })
@@ -58,13 +59,13 @@ app.delete('/api/notes/:id', (request, response, next) => {
 app.put('/api/notes/:id', (request, response, next) => {
   const body = request.body
 
-  if (body.title === undefined || body.content === undefined) {
+  if (body.title === undefined) {
     return response.status(400).json({ error: 'Invalid data' })
   }
 
   const note = {
     title: body.title,
-    content: body.content,
+    content: body.content || '',
     important: body.important || false,
     updated: new Date(),
   }
