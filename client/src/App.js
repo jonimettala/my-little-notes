@@ -1,4 +1,4 @@
-import './App.css';
+import './App.css'
 import NavBar from './NavBar'
 
 function App() {
@@ -9,4 +9,4 @@ function App() {
   );
 }
 
-export default App;
+export default App
