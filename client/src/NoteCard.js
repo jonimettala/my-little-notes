@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
@@ -17,8 +18,9 @@ const useStyles = makeStyles({
     margin: '0 2px',
     transform: 'scale(0.8)'
   },
-  title: {
-    fontSize: 14
+  timestamps: {
+    fontSize: 14,
+    marginLeft: 10
   },
   pos: {
     marginBottom: 12
@@ -32,13 +34,9 @@ const NoteCard = ({ note }) => {
   console.log(note)
 
   return (
-    <Grid container xs={12} lg={5}>
+    <Grid container xs={12} lg={6}>
       <Card className={classes.root} variant="outlined">
         <CardContent>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-            added: {note.added}<br />
-            modified: {note.updated}
-          </Typography>
           <Typography variant="h5" component="h2">
             {note.title}
           </Typography>
@@ -47,8 +45,16 @@ const NoteCard = ({ note }) => {
           </Typography>
         </CardContent>
         <CardActions>
+          <Grid container direction='column'>
+          <Typography className={classes.timestamps} color="textSecondary" gutterBottom>
+              added: {moment(note.added).format('llll')}
+              {note.updated !== null ? <><br />modified: {moment(note.updated).format('llll')}</> : <></>}
+            </Typography>
+          <Grid container>
           <Button size="small">Open</Button>
           <Button size="small">Delete</Button>
+          </Grid>
+          </Grid>
         </CardActions>
       </Card>
     </Grid>
