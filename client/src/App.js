@@ -25,7 +25,7 @@ const App = () => {
       <NavBar />
       <Grid container direction='column'>
         <Grid container>
-          <Grid item xs={'auto'} sm={1} md={2} />
+          <Grid item xs={false} sm={1} md={2} />
           <Grid item container xs={12} sm={10} md={8}>
             <Switch>
             <Route exact path='/'>
@@ -39,7 +39,7 @@ const App = () => {
               </Route>
             </Switch>
           </Grid>
-          <Grid item xs={'auto'} sm={1} md={2} />
+          <Grid item xs={false} sm={1} md={2} />
         </Grid>
       </Grid>
     </Router>
