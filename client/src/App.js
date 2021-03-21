@@ -6,6 +6,7 @@ import './App.css'
 import NavBar from './NavBar'
 import noteService from './services/notes'
 import NoteList from './NoteList'
+import AddNote from './AddNote'
 
 const App = () => {
   const [notes, setNotes] = useState([])
@@ -20,18 +21,25 @@ const App = () => {
   useEffect(fetchNotes, [])
 
   return (
-    <>
+    <Router>
       <NavBar />
       <Grid container direction='column'>
         <Grid container>
           <Grid item xs={'auto'} sm={1} md={2} />
           <Grid item container xs={12} sm={10} md={8}>
-            <NoteList notes={notes} />
+            <Switch>
+            <Route exact path='/'>
+                <NoteList notes={notes} />
+              </Route>
+              <Route exact path='/add'>
+                <AddNote />
+              </Route>
+            </Switch>
           </Grid>
           <Grid item xs={'auto'} sm={1} md={2} />
         </Grid>
       </Grid>
-    </>
+    </Router>
   )
 }
 

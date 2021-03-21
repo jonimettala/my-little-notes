@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+// import Link from '@material-ui/core/Link'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -19,14 +21,14 @@ export default function NavBar () {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position='static'>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant='h6' className={classes.title}>
             My Little Notes
           </Typography>
-          <Button color="inherit">Notes</Button>
-          <Button color="inherit">Add Note</Button>
-          <Button color="inherit">Filter Importants</Button>
+          <Button component={Link} to={'/'} color='inherit'>Notes</Button>
+          <Button component={Link} to={'/new'} color='inherit'>Add Note</Button>
+          <Button component={Link} to={'/important'} color='inherit'>Filter Importants</Button>
         </Toolbar>
       </AppBar>
     </div>
