@@ -34,7 +34,7 @@ const NoteCard = ({ note }) => {
   console.log(note)
 
   return (
-    <Grid container xs={12} lg={6}>
+    <Grid container item xs={12} lg={6}>
       <Card className={classes.root} variant="outlined">
         <CardContent>
           <Typography variant="h5" component="h2">
