@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Grid from '@material-ui/core/Grid'
+
 import './App.css'
 import NavBar from './NavBar'
-
 import noteService from './services/notes'
 import NoteList from './NoteList'
 
