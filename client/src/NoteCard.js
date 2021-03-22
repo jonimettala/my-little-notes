@@ -51,7 +51,7 @@ const NoteCard = ({ note }) => {
               {note.updated !== null ? <><br />modified: {moment(note.updated).format('llll')}</> : <></>}
             </Typography>
           <Grid container>
-          <Button size="small">Open</Button>
+          <Button size="small">Edit</Button>
           <Button size="small">Delete</Button>
           </Grid>
           </Grid>
