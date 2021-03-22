@@ -1,12 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import { makeStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
-import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
+import { Grid, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core'
 
 const useStyles = makeStyles({
   root: {
@@ -25,7 +20,9 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12
   },
-  whiteSpace: 'pre-line'
+  note: {
+    whiteSpace: 'pre-wrap'
+  }
 })
 
 const NoteCard = ({ note, handleDelete }) => {
@@ -41,7 +38,7 @@ const NoteCard = ({ note, handleDelete }) => {
           <Typography variant="h5" component="h2">
             {note.title}
           </Typography>
-          <Typography style={{ whiteSpace: 'pre-wrap' }} variant="body2" component="p">
+          <Typography className={classes.note} variant="body2" component="p">
             {note.content}
           </Typography>
         </CardContent>
