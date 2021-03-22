@@ -32,7 +32,7 @@ const App = () => {
                 <NoteList notes={notes} />
               </Route>
               <Route exact path='/add'>
-                <AddNote />
+                <AddNote notes={notes} setNotes={setNotes} />
               </Route>
               <Route>
                 <NoteList notes={notes} important={true} />

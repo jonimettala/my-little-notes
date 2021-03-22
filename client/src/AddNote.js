@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { makeStyles, Grid, TextField, Button } from '@material-ui/core'
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
 
+import noteService from './services/notes'
+
 const useStyles = makeStyles({
   root: {
     flexGrow: 1
@@ -15,7 +17,7 @@ const useStyles = makeStyles({
   }
 })
 
-const AddNote = () => {
+const AddNote = ({ notes, setNotes }) => {
   const classes = useStyles()
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
@@ -31,6 +33,16 @@ const AddNote = () => {
     if (!title && !content) {
       setTitleError(true)
       setContentError(true)
+    } else {
+      noteService
+        .create({
+          title: title,
+          content: content,
+          important: important
+        })
+        .then(response => {
+          setNotes(notes.concat(response))
+        })
     }
 
     console.log(title, content, important)
