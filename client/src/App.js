@@ -6,7 +6,7 @@ import './App.css'
 import NavBar from './NavBar'
 import noteService from './services/notes'
 import NoteList from './NoteList'
-import AddNote from './AddNote'
+import EditNote from './EditNote'
 
 const App = () => {
   const [notes, setNotes] = useState([])
@@ -32,7 +32,7 @@ const App = () => {
                 <NoteList notes={notes} />
               </Route>
               <Route exact path='/add'>
-                <AddNote notes={notes} setNotes={setNotes} />
+                <EditNote notes={notes} setNotes={setNotes} />
               </Route>
               <Route>
                 <NoteList notes={notes} important={true} />

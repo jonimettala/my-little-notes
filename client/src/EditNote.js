@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import { makeStyles, Grid, TextField, Button } from '@material-ui/core'
+import { makeStyles, Grid, TextField, Button, FormControlLabel, Checkbox } from '@material-ui/core'
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
+import StarIcon from '@material-ui/icons/Star'
+import StarBorderIcon from '@material-ui/icons/StarBorder'
 
 import noteService from './services/notes'
 
@@ -12,12 +14,12 @@ const useStyles = makeStyles({
     margin: 10,
     display: 'block'
   },
-  submit: {
+  button: {
     margin: 10
   }
 })
 
-const AddNote = ({ notes, setNotes }) => {
+const EditNote = ({ notes, setNotes }) => {
   const classes = useStyles()
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
@@ -69,17 +71,29 @@ const AddNote = ({ notes, setNotes }) => {
           fullWidth
           error={contentError}
         />
+        <FormControlLabel
+          className={classes.button}
+          onChange={() => { setImportant(!important) }}
+          control={
+            <Checkbox
+              icon={<StarBorderIcon />}
+              checkedIcon={<StarIcon />}
+              name="Important"
+              checked={important}
+            />}
+          label="Important"
+        />
         <Button
-          className={classes.submit}
+          className={classes.button}
           type='submit'
           variant='contained'
           endIcon={<KeyboardArrowRightIcon />}
         >
-          Add
+          Save
         </Button>
       </form>
     </Grid>
   )
 }
 
-export default AddNote
+export default EditNote
