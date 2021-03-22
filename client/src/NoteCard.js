@@ -24,7 +24,8 @@ const useStyles = makeStyles({
   },
   pos: {
     marginBottom: 12
-  }
+  },
+  whiteSpace: 'pre-line'
 })
 
 const NoteCard = ({ note, handleDelete }) => {
@@ -40,7 +41,7 @@ const NoteCard = ({ note, handleDelete }) => {
           <Typography variant="h5" component="h2">
             {note.title}
           </Typography>
-          <Typography variant="body2" component="p">
+          <Typography style={{ whiteSpace: 'pre-wrap' }} variant="body2" component="p">
             {note.content}
           </Typography>
         </CardContent>
