@@ -20,6 +20,37 @@ const App = () => {
   }
   useEffect(fetchNotes, [])
 
+  const handleDelete = (id) => {
+    const wantsDelete = window.confirm('Are you sure you want to delete the note?')
+    if (wantsDelete) {
+      noteService
+        .remove(id)
+        .then(() => {
+          const newNotes = notes
+          let noteIndex = 0
+          for (const note of newNotes) {
+            if (note.id === id) {
+              newNotes.splice(noteIndex, 1)
+            }
+            noteIndex++
+          }
+          setNotes([...newNotes])
+        })
+        .catch(() => {
+          window.alert('The note has been already deleted')
+          const newNotes = notes
+          let noteIndex = 0
+          for (const note of newNotes) {
+            if (note.id === id) {
+              newNotes.splice(noteIndex, 1)
+            }
+            noteIndex++
+          }
+          setNotes([...newNotes])
+        })
+    }
+  }
+
   return (
     <Router>
       <NavBar />
@@ -29,13 +60,13 @@ const App = () => {
           <Grid item container xs={12} sm={10} md={8}>
             <Switch>
             <Route exact path='/'>
-                <NoteList notes={notes} />
+                <NoteList notes={notes} handleDelete={handleDelete} />
               </Route>
               <Route exact path='/add'>
                 <EditNote notes={notes} setNotes={setNotes} />
               </Route>
               <Route>
-                <NoteList notes={notes} important={true} />
+                <NoteList notes={notes} important={true} handleDelete={handleDelete} />
               </Route>
             </Switch>
           </Grid>

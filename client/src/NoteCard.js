@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   }
 })
 
-const NoteCard = ({ note }) => {
+const NoteCard = ({ note, handleDelete }) => {
   const classes = useStyles()
   // const bull = <span className={classes.bullet}>•</span>
 
@@ -52,7 +52,7 @@ const NoteCard = ({ note }) => {
             </Typography>
           <Grid container>
           <Button size="small">Edit</Button>
-          <Button size="small">Delete</Button>
+          <Button onClick={() => handleDelete(note.id)} size="small">Delete</Button>
           </Grid>
           </Grid>
         </CardActions>
