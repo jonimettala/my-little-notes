@@ -28,8 +28,8 @@ export default function NavBar ({ showImportantOnly, setShowImportantOnly }) {
           </Typography>
           <Route exact path='/'>
             {showImportantOnly
-              ? <Button onClick={toggleImportant} color='inherit'>Show Important</Button>
-              : <Button onClick={toggleImportant} color='inherit'>Show Everything</Button>}
+              ? <Button onClick={toggleImportant} color='inherit'>Show Everything</Button>
+              : <Button onClick={toggleImportant} color='inherit'>Show Important Only</Button>}
             <Button component={Link} to={'/add'} color='inherit'>Add Note</Button>
           </Route>
           <Route exact path='/add'>
