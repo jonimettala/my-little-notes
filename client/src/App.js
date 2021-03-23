@@ -10,6 +10,7 @@ import EditNote from './EditNote'
 
 const App = () => {
   const [notes, setNotes] = useState([])
+  const [showImportantOnly, setShowImportantOnly] = useState(false)
 
   const fetchNotes = () => {
     noteService
@@ -22,14 +23,14 @@ const App = () => {
 
   return (
     <Router>
-      <NavBar />
+      <NavBar showImportantOnly={showImportantOnly} setShowImportantOnly={setShowImportantOnly} />
       <Grid container direction='column'>
         <Grid container>
           <Grid item xs={false} sm={1} md={2} />
           <Grid item container xs={12} sm={10} md={8}>
             <Switch>
             <Route exact path='/'>
-                <NoteList notes={notes} setNotes={setNotes} />
+                <NoteList notes={notes} setNotes={setNotes} important={showImportantOnly} />
               </Route>
               <Route exact path='/add'>
                 <EditNote notes={notes} setNotes={setNotes} />
