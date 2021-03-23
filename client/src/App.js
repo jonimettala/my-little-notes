@@ -33,10 +33,10 @@ const App = () => {
                 <NoteList notes={notes} setNotes={setNotes} important={showImportantOnly} />
               </Route>
               <Route exact path='/add'>
-                <EditNote notes={notes} setNotes={setNotes} edit={false} />
+                <EditNote notes={notes} setNotes={setNotes} editing={false} />
               </Route>
               <Route exact path='/note/:id'>
-                <EditNote notes={notes} setNotes={setNotes} edit={true}/>
+                <EditNote notes={notes} setNotes={setNotes} editing={true}/>
               </Route>
             </Switch>
           </Grid>
