@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Card, CardActions, CardContent, Button, Typography } from '@material-ui/core'
 
@@ -49,7 +50,7 @@ const NoteCard = ({ note, handleDelete }) => {
               {note.updated !== null ? <><br />modified: {moment(note.updated).format('llll')}</> : <></>}
             </Typography>
           <Grid container>
-          <Button size="small">Edit</Button>
+          <Button component={Link} to={`/note/${note.id}`} size="small">Edit</Button>
           <Button onClick={() => handleDelete(note.id)} size="small">Delete</Button>
           </Grid>
           </Grid>

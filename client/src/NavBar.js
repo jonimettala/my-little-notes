@@ -35,6 +35,9 @@ export default function NavBar ({ showImportantOnly, setShowImportantOnly }) {
           <Route exact path='/add'>
             <Button component={Link} to={'/'} color='inherit'>Cancel</Button>
           </Route>
+          <Route exact path='/note/:id'>
+            <Button component={Link} to={'/'} color='inherit'>Cancel</Button>
+          </Route>
         </Toolbar>
       </AppBar>
     </div>
