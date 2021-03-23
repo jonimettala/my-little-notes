@@ -35,9 +35,6 @@ const App = () => {
               <Route exact path='/add'>
                 <EditNote notes={notes} setNotes={setNotes} />
               </Route>
-              <Route>
-                <NoteList notes={notes} setNotes={setNotes} important={true} />
-              </Route>
             </Switch>
           </Grid>
           <Grid item xs={false} sm={1} md={2} />
