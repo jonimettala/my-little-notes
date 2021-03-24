@@ -5,12 +5,22 @@ import NoteCard from './NoteCard'
 
 const NoteList = ({ important }) => {
   const [notes, setNotes] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [connectionError, setConnectionError] = useState(false)
 
   const fetchNotes = () => {
     noteService
       .getAll()
       .then(initNotes => {
         setNotes(initNotes)
+        setLoading(false)
+      })
+      .catch((err) => {
+        setLoading(false)
+
+        if (err.response.status === 500) {
+          setConnectionError(true)
+        }
       })
   }
   useEffect(fetchNotes, [])
@@ -45,8 +55,9 @@ const NoteList = ({ important }) => {
         })
     }
   }
-
-  if (notes.length === 0) {
+  if (connectionError) {
+    return <p>Failed to reach the server.</p>
+  } else if (notes.length === 0) {
     return <p>No notes to show.</p>
   } else if (important === true) {
     const notesToShow = notes.filter((note) => note.important === true)

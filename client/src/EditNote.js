@@ -33,6 +33,7 @@ const EditNote = ({ editing }) => {
   const [fetchedNote, setFetchedNote] = useState({})
   const [loading, setLoading] = useState(editing)
   const [loadingFailed, setLoadingFailed] = useState(false)
+  const [connectionError, setConnectionError] = useState(false)
 
   const fetchNote = () => {
     noteService
@@ -44,9 +45,13 @@ const EditNote = ({ editing }) => {
         setImportant(note.important)
         setLoading(false)
       })
-      .catch(() => {
+      .catch((err) => {
         setLoading(false)
         setLoadingFailed(true)
+
+        if (err.response.status === 500) {
+          setConnectionError(true)
+        }
       })
   }
   if (editing) {
@@ -71,17 +76,25 @@ const EditNote = ({ editing }) => {
         .then(() => {
           setRedirectToList(true)
         })
+        .catch(() => {
+          window.alert('Failed to reach the server. Please try again later.')
+        })
     } else {
       noteService
         .update(id, title, content, important)
         .then(() => {
           setRedirectToList(true)
         })
+        .catch(() => {
+          window.alert('Failed to reach the server. Please try again later.')
+        })
     }
   }
 
   if (redirectToList) {
     return <Redirect to={'/'} />
+  } else if (connectionError) {
+    return <p>Failed to reach the server.</p>
   } else if (loading) {
     return <p>Loading</p>
   } else if (loadingFailed) {
