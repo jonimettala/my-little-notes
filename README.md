@@ -4,7 +4,7 @@
 
 1. git clone
 1. cd my-little-notes
-1. vim .env & set the following(might want to use some other editor in case you'd need to google how to quit vim)
+1. vim .env & set the following (might want to use some other editor in case you'd need to google how to quit vim)
 1. `MONGODB_URI=yoursupersecretmongodburi`
 1. `PORT=5001`
 1. npm start
