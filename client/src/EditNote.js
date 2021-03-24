@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   }
 })
 
-const EditNote = ({ notes, setNotes, editing }) => {
+const EditNote = ({ editing }) => {
   const { id } = useParams()
 
   const classes = useStyles()
@@ -32,24 +32,21 @@ const EditNote = ({ notes, setNotes, editing }) => {
   const [redirectToList, setRedirectToList] = useState(false)
   const [fetchedNote, setFetchedNote] = useState({})
   const [loading, setLoading] = useState(editing)
-  const [notFound, setNotFound] = useState(false)
+  const [loadingFailed, setLoadingFailed] = useState(false)
 
   const fetchNote = () => {
-    console.log(id)
     noteService
       .get(id)
       .then(note => {
-        console.log(note)
         setFetchedNote(note)
-        console.log(note)
         setTitle(note.title)
         setContent(note.content)
         setImportant(note.important)
         setLoading(false)
       })
       .catch(() => {
-        setNotFound(true)
-        console.log('not found')
+        setLoading(false)
+        setLoadingFailed(true)
       })
   }
   if (editing) {
@@ -71,46 +68,23 @@ const EditNote = ({ notes, setNotes, editing }) => {
           content: content,
           important: important
         })
-        .then(response => {
-          setNotes(notes.concat(response))
+        .then(() => {
           setRedirectToList(true)
         })
     } else {
       noteService
         .update(id, title, content, important)
-        .then(response => {
-          const newNotes = notes
-          let noteIndex = 0
-          for (let note of newNotes) {
-            if (note.id === id) {
-              const newNote = {}
-              newNote.id = id
-              newNote.title = title
-              newNote.content = content
-              newNote.import = important
-              newNote.created = note.created
-              newNote.updated = new Date()
-              console.log(newNote)
-              note = newNote
-              note.content = '!!!'
-              console.log('muokattu')
-              setNotes(notes.splice(noteIndex, noteIndex, newNote))
-            }
-            noteIndex++
-          }
+        .then(() => {
           setRedirectToList(true)
-        }
-        )
+        })
     }
-
-    console.log(title, content, important)
   }
 
   if (redirectToList) {
     return <Redirect to={'/'} />
-  } else if (loading && !notFound) {
+  } else if (loading) {
     return <p>Loading</p>
-  } else if (loading && notFound) {
+  } else if (loadingFailed) {
     return <p>Note not found</p>
   } else {
     return (

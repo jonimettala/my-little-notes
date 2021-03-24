@@ -28,9 +28,6 @@ const useStyles = makeStyles({
 
 const NoteCard = ({ note, handleDelete }) => {
   const classes = useStyles()
-  // const bull = <span className={classes.bullet}>•</span>
-
-  console.log(note)
 
   return (
     <Grid container item xs={12} lg={6}>

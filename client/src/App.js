@@ -1,25 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
 
 import './App.css'
 import NavBar from './NavBar'
-import noteService from './services/notes'
 import NoteList from './NoteList'
 import EditNote from './EditNote'
 
 const App = () => {
-  const [notes, setNotes] = useState([])
   const [showImportantOnly, setShowImportantOnly] = useState(false)
-
-  const fetchNotes = () => {
-    noteService
-      .getAll()
-      .then(initNotes => {
-        setNotes(initNotes)
-      })
-  }
-  useEffect(fetchNotes, [])
 
   return (
     <Router>
@@ -30,13 +19,13 @@ const App = () => {
           <Grid item container xs={12} sm={10} md={8}>
             <Switch>
             <Route exact path='/'>
-                <NoteList notes={notes} setNotes={setNotes} important={showImportantOnly} />
+                <NoteList important={showImportantOnly} />
               </Route>
               <Route exact path='/add'>
-                <EditNote notes={notes} setNotes={setNotes} editing={false} />
+                <EditNote editing={false} />
               </Route>
               <Route exact path='/note/:id'>
-                <EditNote notes={notes} setNotes={setNotes} editing={true}/>
+                <EditNote editing={true}/>
               </Route>
             </Switch>
           </Grid>

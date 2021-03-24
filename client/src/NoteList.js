@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import noteService from './services/notes'
 import NoteCard from './NoteCard'
 
-const NoteList = ({ notes, setNotes, important }) => {
+const NoteList = ({ important }) => {
+  const [notes, setNotes] = useState([])
+
+  const fetchNotes = () => {
+    noteService
+      .getAll()
+      .then(initNotes => {
+        setNotes(initNotes)
+      })
+  }
+  useEffect(fetchNotes, [])
+
   const handleDelete = (id) => {
     const wantsDelete = window.confirm('Are you sure you want to delete the note?')
     if (wantsDelete) {
