@@ -35,11 +35,11 @@ app.post('/api/notes', (request, response) => {
   }
 
   const note = new Note({
-    title: body.title,
+    title: body.title || '',
     content: body.content || '',
     important: body.important || false,
     added: new Date(),
-    updated: null,
+    updated: null
   })
 
   note.save().then(savedNote => {
@@ -64,10 +64,10 @@ app.put('/api/notes/:id', (request, response, next) => {
   }
 
   const note = {
-    title: body.title,
+    title: body.title || '',
     content: body.content || '',
     important: body.important || false,
-    updated: new Date(),
+    updated: new Date()
   }
 
   Note.findByIdAndUpdate(request.params.id, note, { new: true })
@@ -87,7 +87,7 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === 'CastError') {
     return response.status(400).send({ error: 'ID not found' })
-  } 
+  }
   next(error)
 }
 app.use(errorHandler)
