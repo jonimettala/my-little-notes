@@ -41,21 +41,27 @@ const NoteList = ({ important }) => {
           }
           setNotes([...newNotes])
         })
-        .catch(() => {
-          window.alert('The note has been already deleted')
-          const newNotes = notes
-          let noteIndex = 0
-          for (const note of newNotes) {
-            if (note.id === id) {
-              newNotes.splice(noteIndex, 1)
+        .catch((err) => {
+          if (err.response.status === 500) {
+            window.alert('Failed to reach the server')
+          } else {
+            window.alert('The note has been already deleted')
+            const newNotes = notes
+            let noteIndex = 0
+            for (const note of newNotes) {
+              if (note.id === id) {
+                newNotes.splice(noteIndex, 1)
+              }
+              noteIndex++
             }
-            noteIndex++
+            setNotes([...newNotes])
           }
-          setNotes([...newNotes])
         })
     }
   }
-  if (connectionError) {
+  if (loading) {
+    return <p>Loading</p>
+  } else if (connectionError) {
     return <p>Failed to reach the server.</p>
   } else if (notes.length === 0) {
     return <p>No notes to show.</p>
