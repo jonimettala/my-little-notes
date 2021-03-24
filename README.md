@@ -1,5 +1,7 @@
 # my-little-notes
 
+My Little Notes is a simple note app using React + Material UI + Node + MongoDB.
+
 ## How to run locally:
 
 1. git clone
