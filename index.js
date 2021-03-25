@@ -30,7 +30,7 @@ app.get('/api/notes/:id', (request, response, next) => {
 app.post('/api/notes', (request, response) => {
   const body = request.body
 
-  if (body.title === undefined || body.title === '') {
+  if ((body.title === undefined || body.title === '') && (body.content === undefined || body.content === '')) {
     return response.status(400).json({ error: 'content missing' })
   }
 
@@ -59,7 +59,7 @@ app.delete('/api/notes/:id', (request, response, next) => {
 app.put('/api/notes/:id', (request, response, next) => {
   const body = request.body
 
-  if (body.title === undefined) {
+  if ((body.title === undefined || body.title === '') && (body.content === undefined || body.content === '')) {
     return response.status(400).json({ error: 'Invalid data' })
   }
 

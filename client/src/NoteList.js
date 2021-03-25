@@ -64,10 +64,14 @@ const NoteList = ({ important }) => {
   } else if (connectionError) {
     return <p>Failed to reach the server.</p>
   } else if (notes.length === 0) {
-    return <p>No notes to show.</p>
+    return <p>There no notes yet!</p>
   } else if (important === true) {
     const notesToShow = notes.filter((note) => note.important === true)
-    return notesToShow.map((note) => <NoteCard key={note.id} note={note} handleDelete={handleDelete} />)
+    if (notesToShow.length === 0) {
+      return <p>No important notes.</p>
+    } else {
+      return notesToShow.map((note) => <NoteCard key={note.id} note={note} handleDelete={handleDelete} />)
+    }
   } else {
     return notes.map((note) => <NoteCard key={note.id} note={note} handleDelete={handleDelete} />)
   }
