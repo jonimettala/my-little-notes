@@ -109,7 +109,7 @@ const EditNote = ({ editing }) => {
               className={classes.field}
               label='Title'
               variant='outlined'
-              fullWidth={true}
+              fullWidth
               error={titleError}
             />
             <TextField
